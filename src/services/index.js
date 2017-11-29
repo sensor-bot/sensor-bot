@@ -1,2 +1,6 @@
-module.exports = function (app) { // eslint-disable-line no-unused-vars
+const station = require('./station/station.service.js');
+const measurement = require('./measurement/measurement.service.js');
+module.exports = function (app) {
+  app.configure(station);
+  app.configure(measurement);
 };
