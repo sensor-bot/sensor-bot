@@ -15,20 +15,17 @@ class MeasurementController {
             localId: context.data.localStationId
           }
         }).then((result) => {
-          global.logger.debug('find result: ', result);
           if (result.data.length > 0) {
-            global.logger.debug('Found station');
+            global.logger.debug(`Found existing station (${context.data.localStationId}) for measurement`);
             context.data.station = result.data[0];
             return resolve();
           }
-
-          global.logger.debug('Create new station');
 
           // Create the new station if one doesn't yet exist
           that._stationService.create({
             localId: context.data.localStationId
           }).then((station) => {
-            global.logger.debug('Created Station: ', station._id, station.localId);
+            global.logger.debug(`Created new station (${station.localId}) for measurement`);
             context.data.station = station;
 
             return resolve();
