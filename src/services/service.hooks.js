@@ -7,12 +7,13 @@ class ServiceHooks {
     this.hooks = {
       before: {
         all: [
-          this._commonHooks.iff((hook) => {
-            // 403 if authentication fails
-            return this._authenticator.authenticate(hook.method, hook.data);
-          }, () => {
-            throw new this._errors.Forbidden('Provided app key is incorrect.');
-          })
+          function (that) {
+            return function (context) {
+              if (!that._authenticator.authenticate(context.method, context.data)) {
+                throw new that._errors.Forbidden('Provided app key is incorrect.');
+              }
+            };
+          }(this)
         ],
         find: [],
         get: [],

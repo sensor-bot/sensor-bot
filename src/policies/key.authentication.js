@@ -11,7 +11,7 @@ class KeyAuthenticator {
   authenticate(method, requestData) {
     if (this._methodsToAuth.indexOf(method) === -1) return true;
 
-    return requestData && requestData.appSecret !== this._secretKey;
+    return requestData && requestData.appSecret === this._secretKey;
   }
 }
 
