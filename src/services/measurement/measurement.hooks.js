@@ -1,7 +1,7 @@
 var ServiceHooks = require('../service.hooks');
 
 class MeasurementHooks extends ServiceHooks {
-  constructor(authenticator, commonErrors, commonHooks) {
+  constructor(measurementController, authenticator, commonErrors, commonHooks) {
     super(authenticator, commonErrors, commonHooks);
 
     // Authenticate for only create method
@@ -11,6 +11,9 @@ class MeasurementHooks extends ServiceHooks {
     this.hooks.before.update.push(this._commonHooks.disallow());
     this.hooks.before.patch.push(this._commonHooks.disallow());
     this.hooks.before.remove.push(this._commonHooks.disallow());
+
+    // Set the station field before creating the measurement
+    this.hooks.before.create.push(measurementController.addSetStationHook());
   }
 }
 

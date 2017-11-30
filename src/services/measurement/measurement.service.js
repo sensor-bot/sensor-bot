@@ -4,6 +4,7 @@ const feathersMongoose = require('feathers-mongoose');
 
 const KeyAuthenticator = require('../../policies/key.authentication');
 const createModel = require('../../models/measurement.model');
+const MeasurementController = require('./measurement.controller');
 const MeasurementHooks = require('./measurement.hooks');
 
 const MongooseService = require('../mongoose.service');
@@ -11,8 +12,13 @@ const MongooseService = require('../mongoose.service');
 class MeasurementService extends MongooseService {
   constructor(app) {
     var Model = createModel(app);
-    var hooks = new MeasurementHooks(new KeyAuthenticator(app.get('appSecret')), commonHooks, errors);
-  
+    var hooks = new MeasurementHooks(
+      new MeasurementController(app.service('station')),
+      new KeyAuthenticator(app.get('appSecret')),
+      commonHooks,
+      errors
+    );
+
     var options = {
       name: 'measurement',
       Model,
