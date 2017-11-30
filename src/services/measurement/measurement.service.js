@@ -2,7 +2,7 @@ const errors = require('@feathersjs/errors');
 const commonHooks = require('feathers-hooks-common');
 const feathersMongoose = require('feathers-mongoose');
 
-const KeyAuthenticator = require('../../policies/key.authentication');
+const KeyAuthenticator = require('../../policies/key.authenticator');
 const createModel = require('../../models/measurement.model');
 const MeasurementController = require('./measurement.controller');
 const MeasurementHooks = require('./measurement.hooks');
