@@ -1,6 +1,8 @@
-var gulp = require('gulp');
-var logger = require('winston');
-var nodemon = require('gulp-nodemon');
+const gulp = require('gulp');
+const Logger = require('./src/utils/logger');
+const nodemon = require('gulp-nodemon');
+
+const logger = new Logger('debug', 'nodemon');
 
 // Nodemon task
 gulp.task('nodemon', function () {
@@ -9,10 +11,8 @@ gulp.task('nodemon', function () {
     ext: 'js json html'
   });
   
-  stream.on('start', function () {
-    logger.info('App has started');
-  }).on('quit', function () {
-    logger.info('App has quit');
+  stream.on('quit', function () {
+    logger.warn('App has quit');
     process.exit();
   }).on('restart', function (files) {
     logger.info('App restarted due to: ', files);

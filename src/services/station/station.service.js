@@ -1,7 +1,6 @@
 const errors = require('@feathersjs/errors');
 const commonHooks = require('feathers-hooks-common');
 const feathersMongoose = require('feathers-mongoose');
-const logger = require('winston');
 
 const KeyAuthenticator = require('../../policies/key.authentication');
 const createModel = require('../../models/station.model');
@@ -20,7 +19,7 @@ class StationService extends MongooseService {
       paginate: app.get('paginate')
     };
 
-    super(options, hooks, feathersMongoose, logger);
+    super(options, hooks, feathersMongoose);
   }
 }
 
