@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const Logger = require('./utils/logger');
-global.logger = new Logger();
+global.logger = new Logger('debug');
 
 const app = require('./app');
 const port = app.get('port');

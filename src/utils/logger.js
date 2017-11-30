@@ -1,29 +1,29 @@
-const { Logger, transports, config } = require('winston');
+const winston = require('winston');
 const chalk = require('chalk');
 
-class AppLogger extends Logger {
-  constructor(logLevel = 'silly', category = undefined) {
+class AppLogger extends winston.Logger {
+  constructor(logLevel = 'build') {
     super({
       transports: [
-        new (transports.Console)({
+        new (winston.transports.Console)({
           level: logLevel,
           timestamp: () => { 
             return `[${chalk.grey(new Date())}]`; 
           },
-          formatter: (args) => {
-            var metaString = Object.keys(args.meta).length === 0 && args.meta.constructor === Object ?
-              '' : JSON.stringify(args.meta);
-
-            if (category) {
-              return `${args.timestamp()} - [${chalk.grey(category)}] - ${config.colorize(args.level, args.message + metaString)}`;
-            }
-
-            return `${args.timestamp()} - ${config.colorize(args.level, args.message)}`;
-          },
           colorize: true
         })
-      ]
-    });
+      ],
+      levels: {
+        error: 0,
+        warn: 1,
+        info: 2,
+        verbose: 3,
+        debug: 4,
+        build: 5
+      }
+    }); 
+
+    winston.addColors({ build: 'magenta' });
   }
 }
 
