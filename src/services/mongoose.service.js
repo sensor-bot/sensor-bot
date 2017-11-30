@@ -6,10 +6,9 @@ class MongooseService {
     this._logger = logger;
   }
 
-  start() {
+  start(app) {
     var that = this;
-
-    return function(app) {
+    app.configure((app) => {
       // Initialize our service with any options it requires
       that._logger.info(`Started ${that._options.name} service`);
       app.use(`/${that._options.name}`, that._feathersMongoose(that._options));
@@ -17,7 +16,7 @@ class MongooseService {
       // Get our initialized service so that we can register hooks and filters
       const service = app.service(that._options.name);
       service.hooks(that._hooks.hooks);
-    };
+    });
   }
 }
 

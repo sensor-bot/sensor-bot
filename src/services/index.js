@@ -1,7 +1,6 @@
-const stationBootstrapper = require('./station/station.bootstrapper');
-const measurementBootstrapper = require('./measurement/measurement.bootstrapper');
-
+const MeasurementService = require('./measurement/measurement.service');
+const StationService = require('./station/station.service');
 module.exports = function (app) {
-  stationBootstrapper.bootstrap(app);
-  measurementBootstrapper.bootstrap(app);
+  new StationService(app).start(app);
+  new MeasurementService(app).start(app);
 };
