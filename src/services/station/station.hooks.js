@@ -1,33 +1,12 @@
+var ServiceHooks = require('../service.hooks');
 
+class StationHooks extends ServiceHooks {
+  constructor(authenticator, commonErrors, commonHooks) {
+    super(authenticator, commonErrors, commonHooks);
 
-module.exports = {
-  before: {
-    all: [],
-    find: [],
-    get: [],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
-  },
-
-  after: {
-    all: [],
-    find: [],
-    get: [],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
-  },
-
-  error: {
-    all: [],
-    find: [],
-    get: [],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    // Authenticate for create and update methods
+    this._authenticator.addMethodsToAuthenticate(['create', 'update']);
   }
-};
+}
+
+module.exports = StationHooks;

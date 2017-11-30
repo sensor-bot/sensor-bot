@@ -1,48 +1,17 @@
-var errors = require('@feathersjs/errors');
-var hooks = require('feathers-hooks-common');
+var ServiceHooks = require('../service.hooks');
 
-var KeyAuthenticator = require('../../policies/key.authentication');
+class MeasurementHooks extends ServiceHooks {
+  constructor(authenticator, commonErrors, commonHooks) {
+    super(authenticator, commonErrors, commonHooks);
 
-module.exports = function (app) {
-  var keyAuthenticator = new KeyAuthenticator(app.get('appSecret'));
-  keyAuthenticator.addMethodsToAuthenticate(['create']);
+    // Authenticate for only create method
+    this._authenticator.addMethodsToAuthenticate(['create']);
 
-  return {
-    before: {
-      all: [
-        hooks.iff((hook) => {
-          // 403 if authentication fails
-          return keyAuthenticator.authenticate(hook.method, hook.data);
-        }, () => {
-          throw new errors.Forbidden('Provided app key is incorrect.');
-        })
-      ],
-      find: [],
-      get: [],
-      create: [],
-      update: hooks.disallow(),
-      patch: hooks.disallow(),
-      remove: hooks.disallow()
-    },
-  
-    after: {
-      all: [],
-      find: [],
-      get: [],
-      create: [],
-      update: [],
-      patch: [],
-      remove: []
-    },
-  
-    error: {
-      all: [],
-      find: [],
-      get: [],
-      create: [],
-      update: [],
-      patch: [],
-      remove: []
-    }
-  };
-};
+    // Disable unused methods
+    this.hooks.before.update.push(this._commonHooks.disallow());
+    this.hooks.before.patch.push(this._commonHooks.disallow());
+    this.hooks.before.remove.push(this._commonHooks.disallow());
+  }
+}
+
+module.exports = MeasurementHooks;

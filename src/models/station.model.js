@@ -15,8 +15,14 @@ module.exports = function (app) {
         unique: true
       }
     },
-    displayName: { type: String, trim: true },
-    channelDisplayNames: [{ type: String, trim: true }]
+    displayName: {
+      type: String,
+      trim: true
+    },
+    channelDisplayNames: [{
+      type: String,
+      trim: true
+    }]
   });
 
   return mongooseClient.model('station', station);
