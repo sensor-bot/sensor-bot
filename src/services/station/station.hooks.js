@@ -7,7 +7,7 @@ class StationHooks extends ServiceHooks {
     // Authenticate for create and update methods
     this._authenticator.addMethodsToAuthenticate(['update']);
 
-    // Disable unused methods
+    // Disable methods
     this.hooks.before.create.push(this._commonHooks.disallow('external'));
     this.hooks.before.patch.push(this._commonHooks.disallow('external'));
   }

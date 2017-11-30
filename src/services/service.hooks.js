@@ -9,7 +9,8 @@ class ServiceHooks {
         all: [
           function (that) {
             return function (context) {
-              if (!that._authenticator.authenticate(context.method, context.data)) {
+              var appKey = (context.params.headers) ? context.params.headers['app-key'] : undefined;
+              if (!that._authenticator.authenticate(context.method, appKey)) {
                 throw new that._errors.Forbidden('Provided app key is incorrect.');
               }
             };

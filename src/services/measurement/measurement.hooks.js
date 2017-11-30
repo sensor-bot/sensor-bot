@@ -7,7 +7,7 @@ class MeasurementHooks extends ServiceHooks {
     // Authenticate for only create method
     this._authenticator.addMethodsToAuthenticate(['create']);
 
-    // Disable unused methods
+    // Disable methods
     this.hooks.before.update.push(this._commonHooks.disallow('external'));
     this.hooks.before.patch.push(this._commonHooks.disallow('external'));
     this.hooks.before.remove.push(this._commonHooks.disallow('external'));

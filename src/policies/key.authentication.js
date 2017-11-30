@@ -8,10 +8,10 @@ class KeyAuthenticator {
     this._methodsToAuth = this._methodsToAuth.concat(methods);
   }
 
-  authenticate(method, requestData) {
+  authenticate(method, appKey) {
     if (this._methodsToAuth.indexOf(method) === -1) return true;
 
-    return requestData && requestData.appSecret === this._secretKey;
+    return appKey === this._secretKey;
   }
 }
 
