@@ -16,7 +16,7 @@
             {{vm.selectedStation.displayName || 'Measurement Station'}}
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#" ng-repeat="s in vm.stations" ng-click="vm.displayStation(s)">
+            <a class="dropdown-item" ng-class="{'disabled': s.displayName === vm.selectedStation.displayName}" href="#" ng-repeat="s in vm.stations" ng-click="vm.displayStation(s)">
               {{s.displayName}}
             </a>
           </div>

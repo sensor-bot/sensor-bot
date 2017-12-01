@@ -75,6 +75,8 @@
       }
 
       function displayStation(station) {
+        if (vm.selectedStation && station.displayName === vm.selectedStation.displayName) return;
+
         vm.selectedStation = station;
         vm.hideDefault = true;
 
