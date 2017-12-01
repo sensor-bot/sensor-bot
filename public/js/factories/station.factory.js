@@ -24,6 +24,7 @@
 
           var that = this;
           ret.then(function (res) {
+            that.measurements = {};
             res.data.forEach((m) => {
               if (!that.measurements[m.channelIndex]) {
                 that.measurements[m.channelIndex] = [];
