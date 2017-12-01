@@ -8,10 +8,9 @@
   </head>
   <body ng-app="app" ng-controller="AppController as vm">
     <main class="container">
-      <h2 class="text-center my-4">SensorBot</h2>
-      <hr>
-      <div class="d-flex">
-        <div class="mx-auto dropdown">
+      <h2 class="my-4 d-flex">
+        SensorBot
+        <div class="ml-auto dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{vm.selectedStation.displayName || 'Measurement Station'}}
           </button>
@@ -21,7 +20,8 @@
             </a>
           </div>
         </div>
-      </div>
+      </h2>
+      <hr>
 
       <div class="d-flex">
         <div class="mx-auto mt-4 alert alert-info text-center" ng-hide="vm.hideDefault">
