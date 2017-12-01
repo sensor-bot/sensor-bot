@@ -7,6 +7,8 @@ class KeyAuthenticator extends Authenticator{
   }
 
   _authenticateImpl(appKey) {
+    if (!this._secretKey) return true;
+
     return appKey === this._secretKey;
   }
 }
