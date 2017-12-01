@@ -1,0 +1,23 @@
+.input-button-group-addon-left {
+  padding: 0;
+}
+
+.input-button-group-addon-left > .btn {
+  margin: 0;
+}
+
+.input-button-group-addon-left > .btn:last-child {
+  border-radius: 0;
+}
+
+.input-button-group-addon-right {
+  padding: 0;
+}
+
+.input-button-group-addon-right > .btn {
+  margin: 0;
+}
+
+.input-button-group-addon-right > .btn:first-child {
+  border-radius: 0;
+}
