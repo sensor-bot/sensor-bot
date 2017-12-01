@@ -6,6 +6,5 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb://localhost:27017/sensor_bot",
-  "appSecret": "super_sekrit"
+  "mongodb": "mongodb://localhost:27017/sensor_bot"
 }

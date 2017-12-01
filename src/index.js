@@ -1,6 +1,10 @@
 /* eslint-disable no-console */
 const Logger = require('./utils/logger');
+const ConfigValidator = require('./utils/config.validator.js');
 global.logger = new Logger('debug');
+
+var configValidator = new ConfigValidator();
+configValidator.checkEnv();
 
 const app = require('./app');
 const port = app.get('port');
