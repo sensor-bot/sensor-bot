@@ -17,37 +17,44 @@ const channels = require('./channels');
 
 const mongoose = require('./mongoose');
 
-const app = express(feathers());
+var app = express(feathers());
 
-// Load app configuration
-app.configure(configuration());
-// Enable CORS, security, compression, favicon and body parsing
-app.use(cors());
-app.use(helmet());
-app.use(compress());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(favicon(path.join(app.get('public'), 'img/favicon.ico')));
-// Host the public folder
-app.use('/', express.static(app.get('public')));
+app.sensorBotGetConfiguration = sensorBotGetConfiguration;
+app.sensorBotSetupExpress = sensorBotSetupExpress;
 
-// Set up Plugins and providers
-app.configure(express.rest());
-app.configure(socketio());
+function sensorBotGetConfiguration() {
+  this.configure(configuration());
+}
 
-app.configure(mongoose);
+function sensorBotSetupExpress() {
+  // Enable CORS, security, compression, favicon and body parsing
+  this.use(cors());
+  this.use(helmet());
+  this.use(compress());
+  this.use(express.json());
+  this.use(express.urlencoded({ extended: true }));
+  this.use(favicon(path.join(this.get('public'), 'img/favicon.ico')));
+  // Host the public folder
+  this.use('/', express.static(this.get('public')));
 
-// Configure other middleware (see `middleware/index.js`)
-app.configure(middleware);
-// Set up our services (see `services/index.js`)
-app.configure(services);
-// Set up event channels (see channels.js)
-app.configure(channels);
+  // Set up Plugins and providers
+  this.configure(express.rest());
+  this.configure(socketio());
 
-// Configure a middleware for 404s and the error handler
-app.use(express.notFound());
-app.use(express.errorHandler({ logger: global.logger }));
+  this.configure(mongoose);
 
-app.hooks(appHooks);
+  // Configure other middleware (see `middleware/index.js`)
+  this.configure(middleware);
+  // Set up our services (see `services/index.js`)
+  this.configure(services);
+  // Set up event channels (see channels.js)
+  this.configure(channels);
+
+  // Configure a middleware for 404s and the error handler
+  this.use(express.notFound());
+  this.use(express.errorHandler({ logger: global.logger }));
+
+  this.hooks(appHooks);
+}
 
 module.exports = app;

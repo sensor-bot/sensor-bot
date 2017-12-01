@@ -1,12 +1,20 @@
 /* eslint-disable no-console */
-const Logger = require('./utils/logger');
-const ConfigValidator = require('./utils/config.validator.js');
-global.logger = new Logger('debug');
 
+// Get our configuration
+const app = require('./app');
+app.sensorBotGetConfiguration();
+
+// Create the global logger
+const Logger = require('./utils/logger');
+global.logger = new Logger(app.get('logLevel'));
+
+// Validate Configs
+const ConfigValidator = require('./utils/config.validator.js');
 var configValidator = new ConfigValidator();
 configValidator.checkEnv();
 
-const app = require('./app');
+app.sensorBotSetupExpress();
+
 const port = app.get('port');
 const server = app.listen(port);
 

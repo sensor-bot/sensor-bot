@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const Logger = require('./src/utils/logger');
 const nodemon = require('gulp-nodemon');
 
-const logger = new Logger();
+const logger = new Logger('build');
 
 // Nodemon task
 gulp.task('nodemon', function () {

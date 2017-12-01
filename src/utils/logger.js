@@ -2,7 +2,7 @@ const winston = require('winston');
 const chalk = require('chalk');
 
 class AppLogger extends winston.Logger {
-  constructor(logLevel = 'build') {
+  constructor(logLevel = 'info') {
     super({
       transports: [
         new (winston.transports.Console)({
@@ -24,6 +24,10 @@ class AppLogger extends winston.Logger {
     }); 
 
     winston.addColors({ build: 'magenta' });
+  }
+
+  setLogLevel(newLevel) {
+    this.transports.console.level = newLevel; 
   }
 }
 

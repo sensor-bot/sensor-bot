@@ -7,5 +7,6 @@
     "max": 50
   },
   "mongodb": "MONGODB_URI",
-  "appSecret": "APP_SECRET"
+  "appSecret": "APP_SECRET",
+  "logLevel": "info"
 }
