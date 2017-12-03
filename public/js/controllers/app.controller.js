@@ -40,6 +40,11 @@
             },
             display: true
           }]
+        },
+        elements: {
+          line: {
+            fill: false
+          }
         }
       };
       Chart.defaults.global.elements.point.hitRadius = 3;
