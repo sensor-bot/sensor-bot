@@ -25,7 +25,7 @@
           var that = this;
           ret.then(function (res) {
             that.measurements = {};
-            res.forEach((m) => {
+            res.data.forEach((m) => {
               if (!that.measurements[m.channelIndex]) {
                 that.measurements[m.channelIndex] = [];
               }
@@ -46,7 +46,7 @@
         return $q((resolve, reject) => {
           return StationApiClient.query().$promise
             .then((res) => {
-              return resolve(res.map((s) => build(s)));
+              return resolve(res.data.map((s) => build(s)));
             })
             .catch(reject);
         });
