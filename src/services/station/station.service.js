@@ -15,7 +15,8 @@ class StationService extends MongooseService {
 
     var options = {
       name: 'station',
-      Model
+      Model,
+      paginate: app.get('paginate')
     };
 
     super(options, hooks, feathersMongoose);
