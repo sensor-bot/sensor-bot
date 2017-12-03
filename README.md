@@ -55,6 +55,11 @@ heroku config:set APP_SECRET=<YOUR_SECRET_KEY_HERE>
     * value - The measurement value.
 NOTE - If you created a secret app key in the following step, you must include an "app-key" header in your POST request that provides the key
 
+Example cURL:
+```sh
+curl https://example-sensor-bot.herokuapp.com/measurement -d "localStationId=greenhouse-rpi&value=12&channelIndex=0" -H "app-key: super-sekrit-password"
+```
+
 **Step 7 - View your measurements**
 Your measurements can be viewed at https://<YOUR_APP_NAME_HERE>.herokuapp.com/
 
