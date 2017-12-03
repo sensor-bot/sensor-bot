@@ -15,9 +15,9 @@ class MeasurementController {
             localId: context.data.localStationId
           }
         }).then((result) => {
-          if (result.data.length > 0) {
+          if (result.length > 0) {
             global.logger.debug(`Found existing station (${context.data.localStationId}) for measurement`);
-            context.data.station = result.data[0];
+            context.station = result[0];
             return resolve();
           }
 
