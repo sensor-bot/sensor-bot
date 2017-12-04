@@ -30,9 +30,6 @@
         </div>
       </h2>
       <hr>
-      <h3 class="text-center" ng-hide="true">
-          Loading...
-      </h3>
 
       <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -42,9 +39,15 @@
           <a class="nav-link" data-toggle="tab" href="#settings">Settings</a>
         </li>
       </ul>
+      <h3 class="text-center mt-4" ng-hide="true">
+        Loading...
+      </h3>
       <div class="tab-content" ng-cloak>
         <div id="data" class="tab-pane active">
-          <loader ng-if="vm.loading"></loader>
+          <div class="mt-5" ng-if="vm.loading">
+            <loader></loader>
+          </div>
+          
           <div ng-hide="vm.loading">
             <div class="d-flex" ng-hide="vm.hideDefault">
               <div class="mx-auto mt-4 alert alert-info text-center">
@@ -52,7 +55,7 @@
               </div>
             </div>
 
-            <div class="my-4" ng-show="vm.hideDefault">
+            <div class="my-4" ng-if="vm.hideDefault">
               <canvas class="chart chart-line" chart-data="vm.chartData"
                       chart-series="vm.chartSeries" chart-options="vm.chartOptions"></canvas>
               <hr>
@@ -75,7 +78,9 @@
           </div>
         </div>
         <div id="settings" class="tab-pane">
-          <loader ng-if="vm.loading"></loader>
+          <div class="mt-5" ng-if="vm.loading">
+            <loader></loader>
+          </div>
           <div ng-hide="vm.loading">
             <div class="d-flex" ng-hide="vm.hideDefault">
               <div class="mx-auto mt-4 alert alert-info text-center">

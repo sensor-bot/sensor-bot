@@ -99,12 +99,12 @@
         if (vm.selectedStation && station.localId === vm.selectedStation.localId) return;
 
         vm.selectedStation = station;
-        vm.hideDefault = true;
 
         station.getMeasurementsForStation().then(function () {
           _updateChart(vm.selectedStation);
           _updateSettings(vm.selectedStation);
 
+          vm.hideDefault = true;
           vm.loading = false;
         }).catch(function (res) {
           vm.loading = false;
