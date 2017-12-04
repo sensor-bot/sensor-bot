@@ -6,7 +6,7 @@ https://sensor-bot-demo.herokuapp.com
 
 ## Deployment Guide
 This guide is intended to be very thorough and geared towards people that want a completely free hosting environment
-### Heroku (free but requires a credit card for mLab integration)
+### Heroku - requires a credit card on file for mLab integration
 **Step 1 - Create a new Heroku application** (Web browser)
 1. Create a [heroku account](https://signup.heroku.com/dc)
 2. Sign-in and create a [new app](https://dashboard.heroku.com/new-app)
