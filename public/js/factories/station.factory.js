@@ -10,13 +10,13 @@
         constructor(id, localId, displayName, channelDisplayNames) {
           this._id = id;
           this.localId = localId;
-          this.displayName = displayName || localId;
+          this.displayName = displayName;
           this.channelDisplayNames = channelDisplayNames;
           this.measurements = {};
         }
 
         update() {
-          return StationApiClient.update(this).$promise;
+          return StationApiClient.update(this);
         }
 
         getMeasurementsForStation() {

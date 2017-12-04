@@ -12,6 +12,7 @@
       vm.displayStation = displayStation;
       vm.setTimeScale = setTimeScale;
       vm.setTimeStepSize = setTimeStepSize;
+      vm.updateStation = updateStation;
 
       vm.stepSize = 1;
       vm.chartSeries = [];
@@ -57,6 +58,18 @@
         return stationFactory.query();
       }
 
+      function _updateSettings(selectedStation) {
+        vm.settings = {
+          displayName: selectedStation.displayName,
+          channelNames: Object.keys(selectedStation.measurements).map((k) => {
+            return {
+              index: k,
+              name: selectedStation.channelDisplayNames[k]
+            };
+          })
+        }
+      }
+
       function _updateChart(selectedStation) {
         vm.chartData = _updateData(selectedStation.measurements);
         vm.chartSeries = _updateSeries(selectedStation);
@@ -80,13 +93,14 @@
       }
 
       function displayStation(station) {
-        if (vm.selectedStation && station.displayName === vm.selectedStation.displayName) return;
+        if (vm.selectedStation && station.localId === vm.selectedStation.localId) return;
 
         vm.selectedStation = station;
         vm.hideDefault = true;
 
         station.getMeasurementsForStation().then(function () {
           _updateChart(vm.selectedStation);
+          _updateSettings(vm.selectedStation);
         });
       }
 
@@ -96,6 +110,21 @@
 
       function setTimeStepSize(num) {
         vm.chartOptions.scales.xAxes[0].time.stepSize = num;
+      }
+
+      function updateStation() {
+        vm.selectedStation.displayName = vm.settings.displayName;
+
+        var channelIndexes = vm.settings.channelNames.map(c => Number(c.index));
+        var maxChannelIndex = Math.max(...channelIndexes);
+        vm.selectedStation.channelDisplayNames = new Array(maxChannelIndex + 1);
+        vm.settings.channelNames.forEach((c) => {
+          vm.selectedStation.channelDisplayNames[c.index] = c.name;
+        });
+
+        vm.selectedStation.update().then(function () {
+          vm.chartSeries = _updateSeries(vm.selectedStation);
+        });
       }
     }
 }());

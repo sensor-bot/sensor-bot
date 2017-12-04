@@ -4,13 +4,13 @@
   angular.module('app.services')
     .service('StationApiClient', StationApiClient);
 
-    StationApiClient.$inject = ['$resource'];
+    StationApiClient.$inject = ['$resource', '$http'];
 
-    function StationApiClient($resource) {
-      return $resource('/station/:stationId', {
+    function StationApiClient($resource, $http) {
+      var Client = $resource('/station/:stationId', {
         stationId: '@_id'
       }, {
-        update: {
+        updateImpl: {
           method: 'PUT'
         },
         query: {
@@ -18,5 +18,17 @@
           isArray:false
         },
       });
+
+      angular.extend(Client, {
+        update: function (station, appKey) {
+          if (appKey) {
+            $http.defaults.headers.common['app-key']= appKey;
+          }
+
+          return this.updateImpl(station).$promise;
+        }
+      });
+
+      return Client;
     }
 }());
