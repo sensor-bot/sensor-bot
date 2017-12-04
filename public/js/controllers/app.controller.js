@@ -33,11 +33,11 @@
             time: {
               unit: 'hour',
               displayFormats: {
-                'second': 'kk:mm:ss',
-                'minute': 'kk:mm',
-                'hour': 'kk:mm'
+                'second': 'MMM D, kk:mm:ss',
+                'minute': 'MMM D, kk:mm',
+                'hour': 'MMM D, kk:mm'
               },
-              tooltipFormat: 'MMM D, HH:mm:ss A',
+              tooltipFormat: 'MMM D, kk:mm:ss',
               stepSize: 1,
             },
             display: true
