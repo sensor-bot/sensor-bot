@@ -2,6 +2,11 @@
 <html>
   <head>
     <title>Sensor-Bot</title>
+    <style type="text/css">
+      [ng-cloak] {
+        display: none !important;
+      }
+    </style>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="lib/angular-ui-notification/dist/angular-ui-notification.min.css">
@@ -9,20 +14,25 @@
   </head>
   <body ng-app="app" ng-controller="AppController as vm">
     <main class="container">
-      <h2 class="my-4 d-flex">
+      <h2 class="my-4 d-sm-flex display-4">
         SensorBot
-        <div class="ml-auto dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{vm.selectedStation ? vm.selectedStation.displayName || vm.selectedStation.localId : 'Measurement Station'}}
+        <div class="ml-auto dropdown" ng-cloak>
+          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                  ng-bind="vm.selectedStation ? vm.selectedStation.displayName || vm.selectedStation.localId : 'Measurement Station'">
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" ng-class="{'disabled': s.localId === vm.selectedStation.localId}" href="#" ng-repeat="s in vm.stations" ng-click="vm.displayStation(s)">
-              {{s.displayName || s.localId}}
+            <a class="dropdown-item" ng-class="{'disabled': s.localId === vm.selectedStation.localId}"
+               href="#" ng-repeat="s in vm.stations" ng-click="vm.displayStation(s)"
+               ng-bind="s.displayName || s.localId">
             </a>
           </div>
         </div>
       </h2>
       <hr>
+      <h3 class="text-center" ng-hide="true">
+          Loading...
+      </h3>
 
       <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -32,7 +42,7 @@
           <a class="nav-link" data-toggle="tab" href="#settings">Settings</a>
         </li>
       </ul>
-      <div class="tab-content">
+      <div class="tab-content" ng-cloak>
         <div id="data" class="tab-pane active">
           <loader ng-if="vm.loading"></loader>
           <div ng-hide="vm.loading">
@@ -81,7 +91,7 @@
                   <small id="displayNameHelp" class="form-text text-muted">Give your measurement station a more human friendly name</small>
                 </div>
                 <div class="form-group" ng-repeat="c in vm.settings.channelNames">
-                  <label for="channelName{{c.index}}">Channel {{c.index}}</label>
+                  <label for="channelName{{c.index}}">Channel <span ng-bind="c.index"></span></label>
                   <input type="text" class="form-control" id="channelName{{c.index}}" aria-describedby="channelNameHelp" placeholder="Enter name"
                           ng-model="c.name">
                   <small id="channelNameHelp" ng-show="$last" class="form-text text-muted">Give your measurement channels a more human friendly name</small>
