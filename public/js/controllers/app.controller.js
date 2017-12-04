@@ -122,7 +122,7 @@
           vm.selectedStation.channelDisplayNames[c.index] = c.name;
         });
 
-        vm.selectedStation.update().then(function () {
+        vm.selectedStation.update(vm.settings.secretKey).then(function () {
           vm.chartSeries = _updateSeries(vm.selectedStation);
         });
       }

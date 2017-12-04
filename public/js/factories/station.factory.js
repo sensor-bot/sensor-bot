@@ -15,8 +15,8 @@
           this.measurements = {};
         }
 
-        update() {
-          return StationApiClient.update(this);
+        update(appKey) {
+          return StationApiClient.update(this, appKey);
         }
 
         getMeasurementsForStation() {
