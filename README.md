@@ -1,11 +1,19 @@
 # sensor-bot
-Abstracted web service for recording and displaying data from remote sensors or other data producing clients
+sensor-bot is a web service similar to [io.adafruit.com](https://io.adafruit.com). Even with a paid plan, Adafruit deletes your data after 60 days.  With sensor-bot, you own your data and can do whatever the heck you want with it.  With sensor-bot's Heroku deployment guide, you can host the service for free with HTTPS and a 500MB MongoDB database.
 
 ## Demo
-https://sensor-bot-demo.herokuapp.com
+https://rdelhommer-demos.herokuapp.com
+
+## Why make this when so many IoT dashboards already exist?
+There are a lot of options for IoT dashboards that are way more feature rich than sensor-bot.  Some examples include:
+* Grafana
+* Freeboard
+* Thingsboard
+
+I wanted to make something that was easy and free to host and use.  The original reason for making this was so that some non-technical friends could install a remotely monitored temperature probe in their greenhouse.  My hope is for sensor-bot to be a tool that can be deployed and used by someone without a lot of IT expertise.  To accomplish this, sensor-bot has a very thorough deployment guide, and additionally, it requires minimal configuration.
 
 ## Deployment Guide
-This guide is intended to be very thorough and geared towards people that want a completely free hosting environment
+This guide is intended to be very thorough
 ### Heroku - requires a credit card on file for mLab integration
 **Step 1 - Create a new Heroku application** (Web browser)
 1. Create a [heroku account](https://signup.heroku.com/dc)
@@ -20,7 +28,7 @@ This guide is intended to be very thorough and geared towards people that want a
 1. Download and install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
 
 **Step 4 - Get your own copy of sensor-bot** (Terminal/CMD)
-1. Clone the sensor-bot repo with the following command
+1. Clone the sensor-bot repo
     ```sh
     git clone https://github.com/sensor-bot/sensor-bot
     ```
@@ -30,7 +38,7 @@ This guide is intended to be very thorough and geared towards people that want a
     ```
 
 **Step 5 - Deploy to Heroku** (Web browser and Terminal/CMD)
-1. Login to your heroku account with the command below and enter your accont information when prompted
+1. Login to your heroku account and enter your accont information when prompted
     ```sh
     heroku login
     ```
@@ -64,13 +72,22 @@ This guide is intended to be very thorough and geared towards people that want a
     ```
 
 **Step 7 - View your measurements**
+
 Your measurements can be viewed at https://<YOUR_APP_NAME_HERE>.herokuapp.com/
 
-## Development
-The following command will start the service with nodemon.  Nodemon will auto-restart the service for you if whenever a file is edited.
+## Contributing
+Right now, sensor-bot is pretty barebones.  If you'd like to contribute, please create an issue with your request so that it can be evaluated.
+
+### Development Environment
+The following command will start sensor-bot with nodemon.  Nodemon will auto-restart the service for you whenever a file is edited.
 ```sh
 npm run dev
 ```
 
-## TODO
+### TODO
 * User can specify timeframes to query data
+
+## Some Technical Details
+sensor-bot backend is built with the [FeathersJS](https://github.com/feathersjs/feathers) framework on top of a MongoDB database.
+
+sensor-bot frontend is built with AngularJS, Bootstrap4, and Chart.js.
