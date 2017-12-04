@@ -26,7 +26,9 @@
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "dev": "gulp",
     "start": "node src/",
-    "mocha": "mocha test/ --recursive --exit"
+    "mocha": "mocha test/ --recursive --exit",
+    "bower": "bower install --allow-root && bower prune --allow-root",
+    "postinstall": "npm run bower"
   },
   "cacheDirectories": [
     "public/lib",
