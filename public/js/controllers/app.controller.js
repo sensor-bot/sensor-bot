@@ -37,7 +37,7 @@
                 'hour': 'kk:mm'
               },
               tooltipFormat: 'MMM D, HH:mm:ss A',
-              stepSize: vm.stepSize
+              stepSize: 1,
             },
             display: true
           }]
@@ -109,6 +109,9 @@
       }
 
       function setTimeStepSize(num) {
+        var asNumber = Number(num);
+        if (isNaN(asNumber) || asNumber === 0) return;
+
         vm.chartOptions.scales.xAxes[0].time.stepSize = num;
       }
 
