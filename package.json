@@ -28,6 +28,10 @@
     "start": "node src/",
     "mocha": "mocha test/ --recursive --exit"
   },
+  "cacheDirectories": [
+    "public/lib",
+    "node_modules"
+  ],
   "dependencies": {
     "@feathersjs/configuration": "^1.0.1",
     "@feathersjs/errors": "^3.2.0",
