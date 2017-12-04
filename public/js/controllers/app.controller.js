@@ -4,9 +4,9 @@
   angular.module('app.controllers')
     .controller('AppController', AppController);
 
-    AppController.$inject = ['stationFactory'];
+    AppController.$inject = ['stationFactory', 'Notification'];
 
-    function AppController(stationFactory) {
+    function AppController(stationFactory, Notification) {
       var vm = this;
 
       vm.displayStation = displayStation;
@@ -128,6 +128,10 @@
         vm.selectedStation.update(vm.settings.secretKey).then(function () {
           vm.chartSeries = _updateSeries(vm.selectedStation);
           $('#data-tab').tab('show');
+
+          Notification.success('Measurement station updated');
+        }).catch(function (res) {
+          Notification.error(`Error: ${res.data.message}`);
         });
       }
     }

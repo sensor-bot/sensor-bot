@@ -1,0 +1,20 @@
+{
+  "name": "sensor-bot",
+  "description": "Abstracted web service for recording and displaying data from remote sensors or other data producing clients",
+  "main": "public",
+  "license": "MIT",
+  "keywords": [
+    "feathers"
+  ],
+  "homepage": "https://github.com/sensor-bot/sensor-bot",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-notification": "^0.3.6"
+  }
+}
