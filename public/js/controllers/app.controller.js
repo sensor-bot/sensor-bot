@@ -17,6 +17,7 @@
       vm.stepSize = 1;
       vm.chartSeries = [];
       vm.chartData = [];
+      vm.loading = true;
 
       vm.chartOptions = {
         animation: false,
@@ -52,6 +53,7 @@
 
       _getDependencies().then((stations) => {
         vm.stations = stations;
+        vm.loading = false;
       });
 
       function _getDependencies() {
@@ -67,7 +69,7 @@
               name: selectedStation.channelDisplayNames[k]
             };
           })
-        }
+        };
       }
 
       function _updateChart(selectedStation) {
@@ -93,6 +95,7 @@
       }
 
       function displayStation(station) {
+        vm.loading = true;
         if (vm.selectedStation && station.localId === vm.selectedStation.localId) return;
 
         vm.selectedStation = station;
@@ -101,6 +104,11 @@
         station.getMeasurementsForStation().then(function () {
           _updateChart(vm.selectedStation);
           _updateSettings(vm.selectedStation);
+
+          vm.loading = false;
+        }).catch(function (res) {
+          vm.loading = false;
+          Notification.error(`Error: ${res.data.message}`);
         });
       }
 
@@ -116,6 +124,7 @@
       }
 
       function updateStation() {
+        vm.loading = true;
         vm.selectedStation.displayName = vm.settings.displayName;
 
         var channelIndexes = vm.settings.channelNames.map(c => Number(c.index));
@@ -128,9 +137,12 @@
         vm.selectedStation.update(vm.settings.secretKey).then(function () {
           vm.chartSeries = _updateSeries(vm.selectedStation);
           $('#data-tab').tab('show');
+          vm.settings.secretKey = undefined;
+          vm.loading = false;
 
           Notification.success('Measurement station updated');
         }).catch(function (res) {
+          vm.loading = false;
           Notification.error(`Error: ${res.data.message}`);
         });
       }

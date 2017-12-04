@@ -34,63 +34,69 @@
       </ul>
       <div class="tab-content">
         <div id="data" class="tab-pane active">
-          <div class="d-flex">
-            <div class="mx-auto mt-4 alert alert-info text-center" ng-hide="vm.hideDefault">
-              Select a <span class="text-primary">Measurement Station</span> to begin
+          <loader ng-if="vm.loading"></loader>
+          <div ng-hide="vm.loading">
+            <div class="d-flex" ng-hide="vm.hideDefault">
+              <div class="mx-auto mt-4 alert alert-info text-center">
+                Select a <span class="text-primary">Measurement Station</span> to begin
+              </div>
             </div>
-          </div>
-  
-          <div class="my-4" ng-show="vm.hideDefault">
-            <canvas class="chart chart-line" chart-data="vm.chartData"
-                    chart-series="vm.chartSeries" chart-options="vm.chartOptions"></canvas>
-            <hr>
-            <label class="my-auto">X-Axis Step Size: </label>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Num" aria-label="X-Axis Step Size" aria-describedby="btnGroupAddon" ng-model="vm.stepSize" ng-change="vm.setTimeStepSize(vm.stepSize)">
-              <div class="btn-group input-button-group-addon-right input-group-addon" data-toggle="buttons" role="group" id="btnGroupAddon">
-                <label class="btn btn-secondary" ng-click="vm.setTimeScale('second')">
-                  <input type="radio" name="options" autocomplete="off">Seconds
-                </label>
-                <label class="btn btn-secondary" ng-click="vm.setTimeScale('minute')">
-                  <input type="radio" name="options" autocomplete="off">Minutes
-                </label>
-                <label class="btn btn-secondary active" ng-click="vm.setTimeScale('hour')">
-                  <input type="radio" name="options" autocomplete="off" checked>Hours
-                </label>
+
+            <div class="my-4" ng-show="vm.hideDefault">
+              <canvas class="chart chart-line" chart-data="vm.chartData"
+                      chart-series="vm.chartSeries" chart-options="vm.chartOptions"></canvas>
+              <hr>
+              <label class="my-auto">X-Axis Step Size: </label>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Num" aria-label="X-Axis Step Size" aria-describedby="btnGroupAddon" ng-model="vm.stepSize" ng-change="vm.setTimeStepSize(vm.stepSize)">
+                <div class="btn-group input-button-group-addon-right input-group-addon" data-toggle="buttons" role="group" id="btnGroupAddon">
+                  <label class="btn btn-secondary" ng-click="vm.setTimeScale('second')">
+                    <input type="radio" name="options" autocomplete="off">Seconds
+                  </label>
+                  <label class="btn btn-secondary" ng-click="vm.setTimeScale('minute')">
+                    <input type="radio" name="options" autocomplete="off">Minutes
+                  </label>
+                  <label class="btn btn-secondary active" ng-click="vm.setTimeScale('hour')">
+                    <input type="radio" name="options" autocomplete="off" checked>Hours
+                  </label>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div id="settings" class="tab-pane">
-          <div class="d-flex">
-            <div class="mx-auto mt-4 alert alert-info text-center" ng-hide="vm.hideDefault">
-              Select a <span class="text-primary">Measurement Station</span> to begin
+          <loader ng-if="vm.loading"></loader>
+          <div ng-hide="vm.loading">
+            <div class="d-flex" ng-hide="vm.hideDefault">
+              <div class="mx-auto mt-4 alert alert-info text-center">
+                Select a <span class="text-primary">Measurement Station</span> to begin
+              </div>
             </div>
-          </div>
-          <div class="my-4" ng-show="vm.hideDefault">
-            <form>
-              <div class="form-group">
-                <label for="displayName">Station Name</label>
-                <input type="text" class="form-control" id="displayName" aria-describedby="displayNameHelp" placeholder="Enter name"
-                       ng-model="vm.settings.displayName">
-                <small id="displayNameHelp" class="form-text text-muted">Give your measurement station a more human friendly name</small>
-              </div>
-              <div class="form-group" ng-repeat="c in vm.settings.channelNames">
-                <label for="channelName{{c.index}}">Channel {{c.index}}</label>
-                <input type="text" class="form-control" id="channelName{{c.index}}" aria-describedby="channelNameHelp" placeholder="Enter name"
-                        ng-model="c.name">
-                <small id="channelNameHelp" ng-show="$last" class="form-text text-muted">Give your measurement channels a more human friendly name</small>
-              </div>
-              
-              <div class="form-group my-3">
-                <label for="secretKey">App Key</label>
-                <input type="text" class="form-control" id="secretKey" aria-describedby="secretKeyHelp" placeholder="Enter secret key"
-                        ng-model="vm.settings.secretKey">
-                <small id="secretKeyHelp" class="form-text text-muted">Only needed if you set up a secret key</small>
-              </div>
-              <hr>
-              <button type="submit" class="btn btn-warning" ng-click="vm.updateStation()">Update</button>
-            </form>
+            <div class="my-4" ng-show="vm.hideDefault">
+              <form>
+                <div class="form-group">
+                  <label for="displayName">Station Name</label>
+                  <input type="text" class="form-control" id="displayName" aria-describedby="displayNameHelp" placeholder="Enter name"
+                        ng-model="vm.settings.displayName">
+                  <small id="displayNameHelp" class="form-text text-muted">Give your measurement station a more human friendly name</small>
+                </div>
+                <div class="form-group" ng-repeat="c in vm.settings.channelNames">
+                  <label for="channelName{{c.index}}">Channel {{c.index}}</label>
+                  <input type="text" class="form-control" id="channelName{{c.index}}" aria-describedby="channelNameHelp" placeholder="Enter name"
+                          ng-model="c.name">
+                  <small id="channelNameHelp" ng-show="$last" class="form-text text-muted">Give your measurement channels a more human friendly name</small>
+                </div>
+                
+                <div class="form-group my-3">
+                  <label for="secretKey">App Key</label>
+                  <input type="password" class="form-control" id="secretKey" aria-describedby="secretKeyHelp" placeholder="Enter secret key"
+                          ng-model="vm.settings.secretKey">
+                  <small id="secretKeyHelp" class="form-text text-muted">Only needed if you set up a secret key</small>
+                </div>
+                <hr>
+                <button type="submit" class="btn btn-warning" ng-click="vm.updateStation()">Update</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -98,6 +104,8 @@
     </main>
 
     <!-- Add 3rd-party Dependencies Below -->
+    <!-- fontawesome -->
+    <script src="https://use.fontawesome.com/41d374477b.js"></script>
     <!-- bootstrap (depends on full jQuery and popper) -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
@@ -109,11 +117,14 @@
     <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <script src="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
+    <!-- angular-ui-notification -->
     <script src="lib/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
     
 
     <!-- Add 1st-Party JS -->
     <script src="/js/modules/app.module.js"></script>
+
+    <script src="/js/directives/loader.directive.js"></script>
 
     <script src="/js/configs/app.config.js"></script>
 
