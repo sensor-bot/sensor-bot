@@ -4,7 +4,7 @@
   "main": "public",
   "license": "MIT",
   "keywords": [
-    "feathers"
+    "iot"
   ],
   "homepage": "https://github.com/sensor-bot/sensor-bot",
   "ignore": [

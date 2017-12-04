@@ -2,10 +2,10 @@
   "name": "sensor-bot",
   "description": "Abstracted web service for recording and displaying data from remote sensors or other data producing clients",
   "version": "0.0.0",
-  "homepage": "",
+  "homepage": "https://github.com/sensor-bot/sensor-bot",
   "main": "src",
   "keywords": [
-    "feathers"
+    "iot"
   ],
   "author": {
     "name": "Rick Delhommer",
