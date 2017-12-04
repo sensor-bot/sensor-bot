@@ -127,6 +127,7 @@
 
         vm.selectedStation.update(vm.settings.secretKey).then(function () {
           vm.chartSeries = _updateSeries(vm.selectedStation);
+          $('#data-tab').tab('show');
         });
       }
     }
