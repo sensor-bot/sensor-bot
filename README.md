@@ -1,5 +1,5 @@
 # sensor-bot
-sensor-bot is a web service similar to [io.adafruit.com](https://io.adafruit.com). Even with a paid plan, Adafruit deletes your data after 60 days.  With sensor-bot, you own your data and can do whatever the heck you want with it.  With sensor-bot's Heroku deployment guide, you can host the service for free with HTTPS and a 500MB MongoDB database.
+sensor-bot is a web service similar to [io.adafruit.com](https://io.adafruit.com). Adafruit is great, but even with a paid plan, they delete your data after 60 days.  With sensor-bot, you own your data and can do whatever the heck you want with it.  Also, with sensor-bot's Heroku deployment guide, you can host the service for free with HTTPS and a 500MB MongoDB database.
 
 ## Demo
 https://rdelhommer-demos.herokuapp.com
