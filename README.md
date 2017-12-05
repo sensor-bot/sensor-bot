@@ -5,12 +5,20 @@ sensor-bot is a web service similar to [io.adafruit.com](https://io.adafruit.com
 https://rdelhommer-demos.herokuapp.com
 
 ## Why make this when so many IoT dashboards already exist?
-There are a lot of options for IoT dashboards that are way more feature rich than sensor-bot.  Some examples include:
+There are a lot of options for IoT dashboards that are more feature rich than sensor-bot and may be a better choice for you.  Some examples include:
 * Grafana
 * Freeboard
 * Thingsboard
 
-I wanted to make something that was easy and free to host and use.  The original reason for making this was so that some non-technical friends could install a remotely monitored temperature probe in their greenhouse.  My hope is for sensor-bot to be a tool that can be deployed and used by someone without a lot of IT expertise.  To accomplish this, sensor-bot has a very thorough deployment guide, and additionally, it requires minimal configuration.
+I wanted to make something that was easy and free to host and use.  The original reason for making this was so that some non-technical friends could install a remotely monitored temperature probe in their greenhouse.  The goal was to create something that was easy to deploy and accessible from outside their home network while requiring minimal configuration.
+
+**With sensor-bot you get the following:**
+* No changes to or reconfiguration of your home network
+* Free and professionally managed Platform as a Service (PaaS) hosting.
+    * Free server managed by Heroku
+    * Free 500MB database managed by mLab
+    * Free SSL certificate and Heroku subdomain for securely accessing your sensor-bot deployment from anywhere in the world
+* Thorough deployment guide
 
 ## Deployment Guide
 This guide is intended to be very thorough
@@ -79,7 +87,7 @@ Your measurements can be viewed at https://<YOUR_APP_NAME_HERE>.herokuapp.com/
 Right now, sensor-bot is pretty barebones.  If you'd like to contribute, please create an issue with your request so that it can be evaluated.
 
 ### Development Environment
-The following command will start sensor-bot with nodemon.  Nodemon will auto-restart the service for you whenever a file is edited.
+The following command will start sensor-bot with nodemon and a non-production env configuration.  Nodemon will auto-restart the service for you whenever a file is edited.
 ```sh
 npm run dev
 ```
@@ -88,6 +96,6 @@ npm run dev
 * User can specify timeframes to query data
 
 ## Some Technical Details
-sensor-bot backend is built with the [FeathersJS](https://github.com/feathersjs/feathers) framework on top of a MongoDB database.
+sensor-bot backend is built with the [FeathersJS](https://github.com/feathersjs/feathers) framework with the [Mongoose](https://github.com/Automattic/mongoose) ORM
 
 sensor-bot frontend is built with AngularJS, Bootstrap4, and Chart.js.
