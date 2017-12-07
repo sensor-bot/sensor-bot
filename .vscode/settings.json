@@ -1,9 +1,0 @@
-{
-  "search.exclude": {
-    "node_modules": true,
-    "public/lib": true
-  },
-  "htmlhint.options": {
-    "doctype-first": false
-  }
-}
