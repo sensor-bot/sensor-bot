@@ -14,10 +14,10 @@ class MeasurementController {
           query: {
             localId: context.data.localStationId
           }
-        }).then((result) => {
-          if (result.data.length > 0) {
+        }).then((res) => {
+          if (res.length > 0) {
             global.logger.debug(`Found existing station (${context.data.localStationId}) for measurement`);
-            context.data.station = result.data[0];
+            context.data.station = res[0];
             return resolve();
           }
 
@@ -32,6 +32,28 @@ class MeasurementController {
           }).catch(reject);
         }).catch(reject);
       });
+    }
+  }
+
+  addCreatedAtReverseSortHook() {
+    var that = this;
+
+    return createdAtReverseSortHook;
+
+    function createdAtReverseSortHook(ctx) {
+      ctx.result.sort((a, b) => {
+        return (a.createdAt < b.createdAt) ? 1 : ((a.createdAt > b.createdAt) ? -1 : 0);
+      });
+    }
+  }
+
+  addQueryLimitHook() {
+    var that = this;
+
+    return queryLimitHook;
+
+    function queryLimitHook(ctx) {
+      ctx.result = ctx.result.slice(0, 500);
     }
   }
 }

@@ -21,8 +21,7 @@ class MeasurementService extends MongooseService {
 
     var options = {
       name: 'measurement',
-      Model,
-      paginate: app.get('paginate')
+      Model
     };
 
     super(options, hooks, feathersMongoose);

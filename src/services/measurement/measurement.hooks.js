@@ -13,6 +13,8 @@ class MeasurementHooks extends ServiceHooks {
     this.hooks.before.remove.push(this._commonHooks.disallow('external'));
 
     // Set the station field before creating the measurement
+    this.hooks.after.find.push(measurementController.addCreatedAtReverseSortHook());
+    this.hooks.after.find.push(measurementController.addQueryLimitHook());
     this.hooks.before.create.push(measurementController.addSetStationHook());
   }
 }

@@ -7,11 +7,6 @@
     MeasurementApiClient.$inject = ['$resource'];
 
     function MeasurementApiClient($resource) {
-      return $resource('/measurement', {}, {
-        query: {
-          method:'GET',
-          isArray:false
-        }
-      });
+      return $resource('/measurement', {}, {});
     }
 }());

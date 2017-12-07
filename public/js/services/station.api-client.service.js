@@ -12,11 +12,7 @@
       }, {
         updateImpl: {
           method: 'PUT'
-        },
-        query: {
-          method:'GET',
-          isArray:false
-        },
+        }
       });
 
       angular.extend(Client, {
