@@ -16,7 +16,12 @@
         }
 
         update(appKey) {
-          return StationApiClient.update(this, appKey);
+          // jshint ignore:start
+          var updateData = { ...this };
+          // jshint ignore:end
+
+          delete updateData.measurements;
+          return StationApiClient.update(updateData, appKey);
         }
 
         getMeasurementsForStation() {
