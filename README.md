@@ -23,6 +23,12 @@ I wanted to make something that was easy and free to host and use.  The original
 ## Deployment Guide
 This guide is intended to be very thorough
 ### Heroku - requires a credit card on file for mLab integration
+**A Note about mLab**
+
+Technically, when you use the mLab service, you still own your data.  However, you grant mLab a license to do all sorts of things with your data "for the sole purposes of enabling mLab to provide you with the service" - whatever that means.  The relevant portion of the Terms of Service are below.
+
+> 7.1. mLab claims no ownership rights in or to any of Your Content or Application. You retain all copyright and any other rights you already hold in Your Content and/or Application. **You hereby grant mLab a worldwide, royalty-free, and non-exclusive license to reproduce, adapt, modify, translate, publish, publicly perform, publicly display and distribute (i) all Your Content that you submit, transmit, post, process, store, or display on or through the Service, (ii) your Application, in each case, for the sole purposes of enabling mLab to provide you with the Service.**
+
 **Step 1 - Create a new Heroku application** (Web browser)
 1. Create a [heroku account](https://signup.heroku.com/dc)
 2. Sign-in and create a [new app](https://dashboard.heroku.com/new-app)
