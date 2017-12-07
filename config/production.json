@@ -3,8 +3,8 @@
   "port": "PORT",
   "public": "../public/",
   "paginate": {
-    "default": 1000,
-    "max": 5000
+    "default": 500,
+    "max": 1000
   },
   "mongodb": "MONGODB_URI",
   "appSecret": "APP_SECRET",
