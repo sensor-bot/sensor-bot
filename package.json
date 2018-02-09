@@ -56,6 +56,7 @@
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.2.1",
     "mocha": "^4.0.1",
+    "mongobackup": "^0.3.5",
     "nodemon": "^1.12.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"
