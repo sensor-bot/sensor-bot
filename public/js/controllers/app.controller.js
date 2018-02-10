@@ -2,11 +2,14 @@
   'use strict';
 
   angular.module('app.controllers')
-    .controller('AppController', AppController);
+    .controller('AppController', AppController)
+    .config(($locationProvider) => {
+      $locationProvider.html5Mode(true);
+    });
 
-    AppController.$inject = ['stationFactory', 'Notification'];
+    AppController.$inject = ['stationFactory', 'Notification', '$location'];
 
-    function AppController(stationFactory, Notification) {
+    function AppController(stationFactory, Notification, $location) {
       var vm = this;
 
       vm.displayStation = displayStation;
@@ -18,6 +21,7 @@
       vm.chartSeries = [];
       vm.chartData = [];
       vm.loading = true;
+      vm.defaultAxis = true;
 
       vm.chartOptions = {
         animation: false,
@@ -54,6 +58,12 @@
       _getDependencies().then((stations) => {
         vm.stations = stations;
         vm.loading = false;
+
+        let startStationName = $location.hash();
+        let startStation = vm.stations.find(s => s.displayName === startStationName)
+        if (!startStation) return;
+
+        displayStation(startStation);
       });
 
       function _getDependencies() {
@@ -75,6 +85,32 @@
       function _updateChart(selectedStation) {
         vm.chartData = _updateData(selectedStation.measurements);
         vm.chartSeries = _updateSeries(selectedStation);
+
+        let newAxis = determineNewAxis();
+        if (!newAxis) return;
+
+        setTimeScale(newAxis.scale);
+        setTimeStepSize(newAxis.stepSize);
+
+        function determineNewAxis() {
+          if (selectedStation.measurements.length <= 1) return false;
+
+          let endTime = new Date(selectedStation.measurements[0][0].createdAt);
+          let startTime = new Date(selectedStation.measurements[0][selectedStation.measurements[0].length - 1].createdAt);
+
+          let totalMilliseconds = endTime - startTime;
+          let milliPerStep = totalMilliseconds / 10;
+
+          const milliPerHour = 1000*60*60;
+          const milliPerMinute = 1000*60;
+          let scale = milliPerStep > milliPerHour ? 'hour' : milliPerStep > milliPerMinute ? 'minute' : 'second';
+          let stepSize = Math.floor(scale === 'hour' ? milliPerStep / milliPerHour : scale === 'minute' ? milliPerStep / milliPerMinute : milliPerStep / 1000);
+
+          return {
+            scale,
+            stepSize
+          };
+        }
       }
 
       function _updateData(measurements) {
@@ -112,11 +148,20 @@
         });
       }
 
-      function setTimeScale(newUnit) {
+      function setTimeScale(newUnit, fromUi) {
+        if (fromUi) {
+          vm.defaultAxis = false;
+        }
+
         vm.chartOptions.scales.xAxes[0].time.unit = newUnit;
       }
 
-      function setTimeStepSize(num) {
+      function setTimeStepSize(num, fromUi) {
+        if (fromUi) {
+          vm.defaultAxis = false;
+        }
+        vm.stepSize = num.toString();
+
         var asNumber = Number(num);
         if (isNaN(asNumber) || asNumber === 0) return;
 

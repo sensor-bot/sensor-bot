@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <base href="/">
     <title>Sensor-Bot</title>
     <style type="text/css">
       [ng-cloak] {
@@ -23,7 +24,7 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" ng-class="{'disabled': s.localId === vm.selectedStation.localId}"
-               href="#" ng-repeat="s in vm.stations" ng-click="vm.displayStation(s)"
+               href="#{{s.displayName}}" ng-repeat="s in vm.stations" ng-click="vm.displayStation(s)"
                ng-bind="s.displayName || s.localId">
             </a>
           </div>
@@ -61,15 +62,15 @@
               <hr>
               <label class="my-auto">X-Axis Step Size: </label>
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Num" aria-label="X-Axis Step Size" aria-describedby="btnGroupAddon" ng-model="vm.stepSize" ng-change="vm.setTimeStepSize(vm.stepSize)">
+                <input type="text" class="form-control" placeholder="Num" aria-label="X-Axis Step Size" aria-describedby="btnGroupAddon" ng-model="vm.stepSize" ng-change="vm.setTimeStepSize(vm.stepSize, true)">
                 <div class="btn-group input-button-group-addon-right input-group-addon" data-toggle="buttons" role="group" id="btnGroupAddon">
-                  <label class="btn btn-secondary" ng-click="vm.setTimeScale('second')">
+                  <label class="btn btn-secondary" ng-click="vm.setTimeScale('second', true)">
                     <input type="radio" name="options" autocomplete="off">Seconds
                   </label>
-                  <label class="btn btn-secondary" ng-click="vm.setTimeScale('minute')">
+                  <label class="btn btn-secondary" ng-click="vm.setTimeScale('minute', true)">
                     <input type="radio" name="options" autocomplete="off">Minutes
                   </label>
-                  <label class="btn btn-secondary active" ng-click="vm.setTimeScale('hour')">
+                  <label class="btn btn-secondary active" ng-click="vm.setTimeScale('hour', true)">
                     <input type="radio" name="options" autocomplete="off" checked>Hours
                   </label>
                 </div>

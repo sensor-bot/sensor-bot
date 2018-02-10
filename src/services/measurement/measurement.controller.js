@@ -53,8 +53,6 @@ class MeasurementController {
     return queryLimitHook;
 
     function queryLimitHook(ctx) {
-      global.logger.warn(ctx.result[0])
-      global.logger.warn(ctx.result[ctx.result.length - 1])
       ctx.result = ctx.result.slice(0, 500);
     }
   }
