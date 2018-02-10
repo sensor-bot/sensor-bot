@@ -22,6 +22,7 @@
       vm.chartData = [];
       vm.loading = true;
       vm.defaultAxis = true;
+      vm.timeScale = 'hour';
 
       vm.chartOptions = {
         animation: false,
@@ -152,6 +153,7 @@
         if (fromUi) {
           vm.defaultAxis = false;
         }
+        vm.timeScale = newUnit;
 
         vm.chartOptions.scales.xAxes[0].time.unit = newUnit;
       }
