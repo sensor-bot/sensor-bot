@@ -2,7 +2,7 @@
   "host": "HOST",
   "port": "PORT",
   "public": "../public/",
-  "mongodb": "MONGODB_URI",
+  "mongodburi": "MONGODB_URI",
   "appSecret": "APP_SECRET",
   "logLevel": "info"
 }

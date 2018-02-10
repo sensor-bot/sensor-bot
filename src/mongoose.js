@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 module.exports = function (app) {
   let mongoCfg = app.get('mongodb');
-  mongoose.connect(`mongodb://${mongoCfg.host}:${mongoCfg.port}/${mongoCfg.db}`, {
+  let mongoUri = app.get('mongodburi');
+  mongoose.connect(mongoUri || `mongodb://${mongoCfg.host}:${mongoCfg.port}/${mongoCfg.db}`, {
     useMongoClient: true
   });
   mongoose.Promise = global.Promise;
